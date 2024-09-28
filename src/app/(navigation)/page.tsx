@@ -12,7 +12,7 @@ export type Product = {
   thumbnail: string
 }
 
-export async function getProducts() {
+async function getProducts() {
   const res = await fetch('https://temp-test.d2sqh8spejkbjc.amplifyapp.com/api/test')
   return (await res.json()) as Product[]
 }

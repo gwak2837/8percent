@@ -1,7 +1,12 @@
 import ProductCards from '@/app/ProductCards'
 import { notFound } from 'next/navigation'
 
-import { getProducts } from '../page'
+import type { Product } from '../page'
+
+async function getProducts() {
+  const res = await fetch('https://temp-test.d2sqh8spejkbjc.amplifyapp.com/api/test')
+  return (await res.json()) as Product[]
+}
 
 type Props = {
   params: { query: string }
