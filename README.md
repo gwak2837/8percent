@@ -5,7 +5,7 @@
 - macOS 13.6
 - Node.js LTS
 - NPM 10.7
-- Chrome 127.0
+- Chrome 128.0
 - Visual Studio Code 1.91
 - Git 2.45
 

@@ -1,4 +1,5 @@
 import ProductCards from '../ProductCards'
+import Filters from './Filters'
 
 export type Product = {
   index: number
@@ -20,5 +21,10 @@ async function getProducts() {
 export default async function Home() {
   const products = await getProducts()
 
-  return <ProductCards products={products} />
+  return (
+    <>
+      <Filters products={products.map((product) => product.title.split(' '))} />
+      <ProductCards products={products} />
+    </>
+  )
 }

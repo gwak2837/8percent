@@ -15,12 +15,12 @@ export default function ProductCard({ product }: Props) {
         <Image
           alt={product.title}
           className="aspect-video rounded object-cover transition hover:brightness-75"
-          height={500}
+          height={550}
           src={
             product.thumbnail ??
             'https://cdn-media.8percent.kr/deal/CSAHk2iQVB4zS6tzxQ2K1gbgcOIdJ0_Deal_page1.jpg'
           }
-          width={500}
+          width={550}
         />
         <h4 className="mt-3 truncate">{product.title}</h4>
         <div>
