@@ -24,7 +24,7 @@ export default function SearchForm() {
   }
 
   return (
-    <form className="grid w-full grid-cols-[1fr_auto] gap-4 py-4" onSubmit={handleSubmit}>
+    <form className="grid w-full gap-4 py-4 sm:grid-cols-[1fr_auto]" onSubmit={handleSubmit}>
       <div className="relative">
         <input
           className="w-full rounded border px-4 py-2"

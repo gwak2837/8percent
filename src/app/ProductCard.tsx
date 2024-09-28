@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { memo } from 'react'
 
 import type { Product } from './(navigation)/page'
 
@@ -9,9 +8,7 @@ type Props = {
   product: Product
 }
 
-export default memo(ProductCard)
-
-function ProductCard({ product }: Props) {
+export default function ProductCard({ product }: Props) {
   return (
     <li key={product.index}>
       <a href={`https://8percent.kr/deals/${product.index}`} target="_blank">

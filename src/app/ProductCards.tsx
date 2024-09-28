@@ -16,8 +16,8 @@ export default function ProductCards({ products }: Props) {
         {products.slice(0, LIMIT).map((product) => (
           <ProductCard key={product.index} product={product} />
         ))}
+        {products.length > LIMIT && <ProductCardsCSR limit={LIMIT} products={products} />}
       </ul>
-      {products.length > LIMIT && <ProductCardsCSR limit={LIMIT} products={products} />}
     </>
   )
 }

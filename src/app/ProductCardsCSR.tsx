@@ -16,14 +16,12 @@ export default function ProductCardsCSR({ products, limit }: Props) {
 
   return (
     <>
-      <ul className="mt-6 grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6">
-        {products.slice(limit, limit + count).map((product) => (
-          <ProductCard key={product.index} product={product} />
-        ))}
-      </ul>
+      {products.slice(limit, limit + count).map((product) => (
+        <ProductCard key={product.index} product={product} />
+      ))}
       {products.length > limit + count && (
         <button
-          className="my-10 w-full cursor-pointer border p-4 text-center text-lg"
+          className="col-span-full my-10 w-full cursor-pointer border p-4 text-center text-lg"
           onClick={() => setCount((prev) => prev + limit)}
         >
           지난 투자상품 더 보기
