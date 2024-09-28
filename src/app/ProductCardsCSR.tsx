@@ -21,7 +21,7 @@ export default function ProductCardsCSR({ products, limit }: Props) {
       ))}
       {products.length > limit + count && (
         <button
-          className="col-span-full my-10 w-full cursor-pointer border p-4 text-center text-lg"
+          className="col-span-full my-10 w-full cursor-pointer rounded-lg border p-4 text-center text-lg"
           onClick={() => setCount((prev) => prev + limit)}
         >
           지난 투자상품 더 보기
