@@ -9,7 +9,7 @@ type Props = {
 
 export default function HomeLayout({ children }: Props) {
   return (
-    <main className="p-5">
+    <main className="mx-auto max-w-screen-xl p-5">
       <h3 className="text-2xl font-bold">지난 투자 상품</h3>
       <ul className="mb-7 mt-6">
         <li>전체</li>
@@ -17,7 +17,7 @@ export default function HomeLayout({ children }: Props) {
         <li>스페셜 딜</li>
       </ul>
       <SearchForm />
-      {children}
+      <div className="grid gap-5 md:grid-cols-[300px_1fr]">{children}</div>
     </main>
   )
 }

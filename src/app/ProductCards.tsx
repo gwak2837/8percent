@@ -10,6 +10,14 @@ type Props = {
 }
 
 export default function ProductCards({ products }: Props) {
+  if (products.length === 0) {
+    return (
+      <div className="h-[50vh] content-center text-center text-2xl font-bold">
+        검색 결과가 없습니다.
+      </div>
+    )
+  }
+
   return (
     <>
       <ul className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6">

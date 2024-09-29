@@ -1,4 +1,5 @@
 import ProductCards from '../ProductCards'
+import { filterProducts } from '../util/filter'
 import Filters from './Filters'
 
 export type Product = {
@@ -18,13 +19,19 @@ async function getProducts() {
   return (await res.json()) as Product[]
 }
 
-export default async function Home() {
+type Props = {
+  searchParams: Record<string, string | string[]>
+}
+
+export default async function Home({ searchParams }: Props) {
   const products = await getProducts()
+  const titles = products.map((product) => product.title.split(' '))
+  const filteredProducts = filterProducts(products, searchParams)
 
   return (
     <>
-      <Filters products={products.map((product) => product.title.split(' '))} />
-      <ProductCards products={products} />
+      <Filters titles={titles} />
+      <ProductCards products={filteredProducts} />
     </>
   )
 }
