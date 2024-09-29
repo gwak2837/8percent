@@ -1,6 +1,7 @@
 import ProductCards from '../ProductCards'
 import { filterProducts } from '../util/filter'
 import Filters from './Filters'
+import Sort from './Sort'
 
 export type Product = {
   index: number
@@ -31,7 +32,10 @@ export default async function Home({ searchParams }: Props) {
   return (
     <>
       <Filters titles={titles} />
-      <ProductCards products={filteredProducts} />
+      <div className="grid gap-4">
+        <Sort />
+        <ProductCards products={filteredProducts} />
+      </div>
     </>
   )
 }

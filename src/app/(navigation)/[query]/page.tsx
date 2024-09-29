@@ -3,6 +3,7 @@ import { filterProducts } from '@/app/util/filter'
 import { notFound } from 'next/navigation'
 
 import Filters from '../Filters'
+import Sort from '../Sort'
 import { type Product } from '../page'
 
 async function getProducts() {
@@ -30,7 +31,10 @@ export default async function Search({ params: { query }, searchParams }: Props)
   return (
     <>
       <Filters titles={titles} />
-      <ProductCards products={filteredProducts} />
+      <div className="grid gap-4">
+        <Sort />
+        <ProductCards products={filteredProducts} />
+      </div>
     </>
   )
 }
