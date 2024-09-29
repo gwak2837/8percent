@@ -53,7 +53,7 @@ export default function Filters({ titles }: Props) {
             <input className="peer hidden" type="checkbox" />
             <IconArrow className="w-6 peer-checked:rotate-180" />
           </label>
-          <div className="grid max-h-[20vh] grid-cols-[repeat(auto-fill,minmax(90px,1fr))] gap-2 overflow-y-auto rounded-xl bg-white p-3 px-4 peer-has-[:checked]:hidden sm:max-h-[10vh] md:max-h-screen dark:bg-gray-700">
+          <div className="grid max-h-[20vh] grid-cols-[repeat(auto-fill,minmax(90px,1fr))] gap-3 gap-y-2 overflow-y-auto rounded-xl bg-white p-3 px-4 peer-has-[:checked]:hidden md:max-h-screen dark:bg-gray-700">
             {[...new Set(titles.map((title) => title[filter.index]))].map((type, index) => (
               <label className="flex cursor-pointer items-center gap-2" key={index}>
                 <input
