@@ -1,5 +1,6 @@
 'use client'
 
+import IconX from '@/svg/IconX'
 import { useParams, useRouter } from 'next/navigation'
 import { type FormEvent, useRef } from 'react'
 
@@ -24,19 +25,26 @@ export default function SearchForm() {
   }
 
   return (
-    <form className="grid w-full gap-4 py-4 sm:grid-cols-[1fr_auto]" onSubmit={handleSubmit}>
+    <form className="my-4 grid w-full gap-4 sm:grid-cols-[1fr_auto]" onSubmit={handleSubmit}>
       <div className="relative">
         <input
           className="w-full rounded-lg border px-4 py-2"
           defaultValue={decodedQuery}
           name="query"
+          onKeyDown={(e) => e.key === 'Escape' && handleReset()}
           ref={inputRef}
         />
-        <button className="absolute right-0 px-4 py-2" onClick={handleReset} type="button">
-          x
+        <button
+          className="text-stroke-3 absolute right-0 top-1/2 -translate-y-1/2 px-4 py-2"
+          onClick={handleReset}
+          type="button"
+        >
+          <IconX className="w-6 text-gray-600 dark:text-gray-400" />
         </button>
       </div>
-      <button className="rounded-lg bg-violet-500 px-4 py-2 text-white">검색</button>
+      <button className="rounded-lg bg-violet-500 px-4 py-2 text-white transition hover:bg-violet-600">
+        검색
+      </button>
     </form>
   )
 }

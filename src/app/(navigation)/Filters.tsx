@@ -1,8 +1,8 @@
 'use client'
 
-import type { ChangeEvent } from 'react'
-
+import IconArrow from '@/svg/IconArrow'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { type ChangeEvent } from 'react'
 
 type Props = {
   titles: string[][]
@@ -11,6 +11,16 @@ type Props = {
 export default function Filters({ titles }: Props) {
   const router = useRouter()
   const searchParams = useSearchParams()
+
+  function handleFilterClear() {
+    const newSearchParams = new URLSearchParams(Array.from(searchParams.entries()))
+
+    newSearchParams.delete('type')
+    newSearchParams.delete('city')
+    newSearchParams.delete('district')
+
+    router.push(`?${newSearchParams}`, { scroll: false })
+  }
 
   function handleFilterChange(e: ChangeEvent<HTMLInputElement>, key: string) {
     const newSearchParams = new URLSearchParams(Array.from(searchParams.entries()))
@@ -25,10 +35,10 @@ export default function Filters({ titles }: Props) {
   }
 
   return (
-    <div className="flex max-h-full flex-col gap-8 whitespace-nowrap rounded-xl bg-gray-100 p-4 dark:bg-gray-800">
+    <div className="flex flex-col gap-8 whitespace-nowrap rounded-xl bg-gray-100 p-4 dark:bg-gray-800">
       <button
-        className="rounded-lg bg-red-500 p-2 font-semibold text-white opacity-80 sm:text-lg"
-        onClick={() => router.push(`?`)}
+        className="rounded-lg bg-red-500 p-2 font-semibold text-white opacity-80 transition hover:bg-red-600 sm:text-lg"
+        onClick={handleFilterClear}
       >
         전체 초기화
       </button>
@@ -41,32 +51,21 @@ export default function Filters({ titles }: Props) {
           <label className="peer flex items-center gap-2">
             <h4 className="text-xl font-semibold">{filter.title}</h4>
             <input className="peer hidden" type="checkbox" />
-            <svg
-              className="peer-checked:rotate-180"
-              fill="none"
-              height="24"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              width="24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <polyline points="18 15 12 9 6 15" />
-            </svg>
+            <IconArrow className="w-6 peer-checked:rotate-180" />
           </label>
           <div className="grid max-h-[20vh] grid-cols-[repeat(auto-fill,minmax(90px,1fr))] gap-2 overflow-y-auto rounded-xl bg-white p-3 px-4 peer-has-[:checked]:hidden sm:max-h-[10vh] md:max-h-screen dark:bg-gray-700">
             {[...new Set(titles.map((title) => title[filter.index]))].map((type, index) => (
               <label className="flex cursor-pointer items-center gap-2" key={index}>
                 <input
                   checked={searchParams.getAll(filter.key).some((value) => value === type)}
-                  className="h-5 w-5 rounded text-blue-600 transition duration-200 ease-in-out focus:ring-0"
+                  className="peer h-5 w-5 rounded text-violet-600 transition duration-200 ease-in-out focus:ring-0"
                   onChange={(e) => handleFilterChange(e, filter.key)}
                   type="checkbox"
                   value={type}
                 />
-                <span className="text-lg">{type}</span>
+                <span className="text-lg peer-checked:text-violet-600 peer-checked:dark:text-violet-300">
+                  {type}
+                </span>
               </label>
             ))}
           </div>

@@ -1,6 +1,9 @@
+import type { TSort } from '@/app/util/sort'
+
 import ProductCards from '@/app/ProductCards'
 import { filterProducts } from '@/app/util/filter'
 import { searchParamsToString } from '@/app/util/searchParams'
+import { sortProducts } from '@/app/util/sort'
 import { notFound } from 'next/navigation'
 
 import Filters from '../Filters'
@@ -28,14 +31,15 @@ export default async function Search({ params: { query }, searchParams }: Props)
 
   const titles = products.map((product) => product.title.split(' '))
   const filteredProducts = filterProducts(searchedProducts, searchParams)
+  const sortedProducts = sortProducts(filteredProducts, searchParams.sort as TSort)
   const searchParamsString = searchParamsToString(searchParams)
 
   return (
     <>
       <Filters titles={titles} />
-      <div className="grid gap-4">
+      <div className="flex min-w-0 flex-col gap-1">
         <Sort searchParams={searchParamsString} />
-        <ProductCards products={filteredProducts} />
+        <ProductCards products={sortedProducts} />
       </div>
     </>
   )
