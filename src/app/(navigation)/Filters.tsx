@@ -63,7 +63,7 @@ export default function Filters({ titles }: Props) {
                   type="checkbox"
                   value={type}
                 />
-                <span className="text-lg peer-checked:text-violet-600 peer-checked:dark:text-violet-300">
+                <span className="text-lg peer-checked:font-bold peer-checked:text-violet-600 peer-checked:dark:text-violet-300">
                   {type}
                 </span>
               </label>

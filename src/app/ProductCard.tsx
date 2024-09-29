@@ -11,11 +11,11 @@ type Props = {
 
 export default function ProductCard({ product, imagePriority }: Props) {
   return (
-    <li key={product.index}>
+    <li className="group" key={product.index}>
       <a href={`https://8percent.kr/deals/${product.index}`} target="_blank">
         <Image
           alt={product.title}
-          className="aspect-video rounded object-cover transition hover:brightness-75"
+          className="aspect-video rounded object-cover transition group-hover:brightness-75"
           height={550}
           priority={imagePriority}
           src={
