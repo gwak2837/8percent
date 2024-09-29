@@ -6,9 +6,10 @@ import { format투자금액, format투자기간 } from './util/format'
 
 type Props = {
   product: Product
+  imagePriority?: boolean
 }
 
-export default function ProductCard({ product }: Props) {
+export default function ProductCard({ product, imagePriority }: Props) {
   return (
     <li key={product.index}>
       <a href={`https://8percent.kr/deals/${product.index}`} target="_blank">
@@ -16,6 +17,7 @@ export default function ProductCard({ product }: Props) {
           alt={product.title}
           className="aspect-video rounded object-cover transition hover:brightness-75"
           height={550}
+          priority={imagePriority}
           src={
             product.thumbnail ??
             'https://cdn-media.8percent.kr/deal/CSAHk2iQVB4zS6tzxQ2K1gbgcOIdJ0_Deal_page1.jpg'

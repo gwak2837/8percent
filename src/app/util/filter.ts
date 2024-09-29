@@ -8,6 +8,8 @@ export function filterProducts(
   const cityFilter = searchParams.city
   const districtFilter = searchParams.district
 
+  if (!typeFilter && !cityFilter && !districtFilter) return products
+
   return products.filter((product) => {
     const title = product.title.split(' ')
     return (
