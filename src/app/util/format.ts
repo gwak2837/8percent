@@ -2,7 +2,7 @@ export function formatCurrency(value: number) {
   return new Intl.NumberFormat('ko-KR').format(value)
 }
 
-export function format투자금액(value: number) {
+export function formatLoan(value: number) {
   if (value < 100000000) return `${formatCurrency(value / 10000)}만원`
 
   const unit = Math.floor(value / 100000000)

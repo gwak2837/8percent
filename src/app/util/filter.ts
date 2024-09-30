@@ -23,3 +23,14 @@ export function filterProducts(
 }
 
 export const FILTER_KEYS = ['type', 'city', 'cvgr', 'loan'] as const
+
+export const CVGR_VALUES = ['8% 미만', '8% 대', '9% 대', '10% 대', '11% 대', '12% 이상']
+
+export const LOAN_VALUES = [
+  '1억원 미만',
+  '1억원 대',
+  '2억원 대',
+  '3억원 대',
+  '4억원 대',
+  '5억원 이상',
+]

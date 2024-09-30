@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import type { Product } from './(navigation)/page'
 
-import { format투자금액, format투자기간 } from './util/format'
+import { formatLoan, format투자기간 } from './util/format'
 
 type Props = {
   product: Product
@@ -34,8 +34,7 @@ export default function ProductCard({ product, imagePriority }: Props) {
           </span>
         </div>
         <div className="mt-2 flex gap-1 text-xs text-gray-400 dark:text-gray-500">
-          <span>{format투자금액(product.amount)}</span>·
-          <span>{format투자기간(product.length)}</span>
+          <span>{formatLoan(product.amount)}</span>·<span>{format투자기간(product.length)}</span>
         </div>
       </a>
     </li>

@@ -19,10 +19,11 @@ type Props = {
 }
 
 export default function StackedVerticalBarChart({ category, className, legendStatistics }: Props) {
-  const id = `StackedVerticalBarChart-${category}`
+  const chartElementId = `StackedVerticalBarChart-${category}`
+  const legendElementId = `${chartElementId}-legend`
 
   useEffect(() => {
-    const root = Root.new(id)
+    const root = Root.new(chartElementId)
     const chart = createVerticalChart(root)
     setAnimatedAndDarkThemes(root)
 
@@ -59,14 +60,36 @@ export default function StackedVerticalBarChart({ category, className, legendSta
       }),
     )
 
-    // Add legend
-    // https://www.amcharts.com/docs/v5/charts/xy-chart/legend-xy-series/
-    const legend = chart.children.push(
-      Legend.new(root, {
-        centerX: p50,
-        x: p50,
+    // Create chartRoot and chart
+    // https://www.amcharts.com/docs/v5/concepts/legend/#Sizing_external_legend_container
+    const legendRoot = Root.new(legendElementId)
+    setAnimatedAndDarkThemes(legendRoot)
+
+    legendRoot.container.setAll({
+      // width: p100,
+      // height: p100,
+    })
+
+    const legend = legendRoot.container.children.push(
+      Legend.new(legendRoot, {
+        centerY: percent(50),
+        y: percent(50),
+        layout: legendRoot.horizontalLayout,
       }),
     )
+
+    // Resize legend to actual height of its content
+    legend.events.on('boundschanged', () => {
+      const legendElement = document.getElementById(legendElementId)
+      if (!legendElement) return
+
+      const legendStyle = legendElement.style
+      const legendHeight = legend.height()
+
+      legendElement.parentElement!.style.height = legendHeight + 16 + 'px'
+      legendStyle.height = legendHeight + 'px'
+      legendStyle.width = legend.width() + 'px'
+    })
 
     // Add series
     // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
@@ -85,7 +108,7 @@ export default function StackedVerticalBarChart({ category, className, legendSta
       )
 
       series.columns.template.setAll({
-        tooltipText: "{name}: {valueXTotalPercent.formatNumber('#.0')}%",
+        tooltipText: "{name}: {valueXTotalPercent.formatNumber('#.0')}% ({valueX}개)",
         tooltipY: percent(10),
       })
 
@@ -107,6 +130,16 @@ export default function StackedVerticalBarChart({ category, className, legendSta
         })
       })
 
+      series.columns.template.onPrivate('width', (width, target) => {
+        target?.dataItem?.bullets?.forEach((bullet) => {
+          if ((width ?? 0) > bullet.get('sprite').width() + 1) {
+            bullet.get('sprite').show()
+          } else {
+            bullet.get('sprite').hide()
+          }
+        })
+      })
+
       legend.data.push(series)
     }
 
@@ -120,8 +153,16 @@ export default function StackedVerticalBarChart({ category, className, legendSta
 
     return () => {
       root.dispose()
+      legendRoot.dispose()
     }
-  }, [])
+  }, [legendStatistics])
 
-  return <div className={className} id={id} />
+  return (
+    <>
+      <div className={className} id={chartElementId} />
+      <div className="h-11 justify-center overflow-x-scroll">
+        <div className="mx-auto h-7 w-full" id={legendElementId} />
+      </div>
+    </>
+  )
 }

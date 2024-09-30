@@ -4,7 +4,7 @@ import IconArrow from '@/svg/IconArrow'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { type ChangeEvent } from 'react'
 
-import { FILTER_KEYS } from '../util/filter'
+import { CVGR_VALUES, FILTER_KEYS, LOAN_VALUES } from '../util/filter'
 
 type Props = {
   titles: string[][]
@@ -54,12 +54,12 @@ export default function Filters({ titles }: Props) {
         {
           key: FILTER_KEYS[2],
           title: '수익률',
-          checks: ['8% 미만', '8% 대', '9% 대', '10% 대', '11% 대', '12% 이상'],
+          checks: CVGR_VALUES,
         },
         {
           key: FILTER_KEYS[3],
           title: '모집 금액',
-          checks: ['1억원 미만', '1억원 대', '2억원 대', '3억원 대', '4억원 대', '5억원 이상'],
+          checks: LOAN_VALUES,
         },
       ].map((filter) => (
         <div className="grid gap-4" key={filter.key}>

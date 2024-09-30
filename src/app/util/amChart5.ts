@@ -25,7 +25,7 @@ export function createVerticalChart(root: Root) {
       panX: false,
       panY: false,
       wheelX: 'panY',
-      wheelY: 'zoomY',
+      wheelY: 'none',
       paddingLeft: 0,
       layout: root.verticalLayout,
     }),

@@ -30,16 +30,16 @@ type Props = {
 
 export default async function Home({ searchParams }: Props) {
   const products = await getProducts()
-  const titles = products.map((product) => product.title.split(' '))
+  const allTitles = products.map((product) => product.title.split(' '))
   const filteredProducts = filterProducts(products, searchParams)
   const sortedProducts = sortProducts(filteredProducts, searchParams.sort as TSort)
 
   return (
     <>
-      <Filters titles={titles} />
+      <Filters titles={allTitles} />
       <div className="flex min-w-0 flex-col gap-1">
         <Sort searchParams={searchParams} />
-        <Statistics titles={titles} />
+        {filteredProducts.length > 0 && <Statistics products={filteredProducts} />}
         <ProductCards products={sortedProducts} />
       </div>
     </>
