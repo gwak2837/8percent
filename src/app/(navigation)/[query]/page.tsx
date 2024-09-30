@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation'
 
 import Filters from '../Filters'
 import Sort from '../Sort'
+import Statistics from '../Statistics'
 import { type Product } from '../page'
 
 async function getProducts() {
@@ -37,6 +38,7 @@ export default async function Search({ params: { query }, searchParams }: Props)
       <Filters titles={titles} />
       <div className="flex min-w-0 flex-col gap-1">
         <Sort searchParams={searchParams} />
+        {filteredProducts.length > 0 && <Statistics products={filteredProducts} />}
         <ProductCards products={sortedProducts} />
       </div>
     </>

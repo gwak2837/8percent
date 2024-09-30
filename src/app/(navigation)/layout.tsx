@@ -10,7 +10,7 @@ type Props = {
 export default function HomeLayout({ children }: Props) {
   return (
     <main className="mx-auto max-w-screen-xl p-5">
-      <h3 className="text-2xl font-bold">지난 투자 상품</h3>
+      <h2 className="text-2xl font-bold">지난 투자 상품</h2>
       <ul className="mb-7 mt-6 flex gap-4">
         <li>전체</li>
         <li>부동산</li>
