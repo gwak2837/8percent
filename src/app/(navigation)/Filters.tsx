@@ -4,6 +4,8 @@ import IconArrow from '@/svg/IconArrow'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { type ChangeEvent } from 'react'
 
+import { FILTER_KEYS } from '../util/filter'
+
 type Props = {
   titles: string[][]
 }
@@ -14,11 +16,7 @@ export default function Filters({ titles }: Props) {
 
   function handleFilterClear() {
     const newSearchParams = new URLSearchParams(Array.from(searchParams.entries()))
-
-    newSearchParams.delete('type')
-    newSearchParams.delete('city')
-    newSearchParams.delete('district')
-
+    FILTER_KEYS.forEach((key) => newSearchParams.delete(key))
     router.push(`?${newSearchParams}`, { scroll: false })
   }
 
@@ -43,9 +41,26 @@ export default function Filters({ titles }: Props) {
         전체 초기화
       </button>
       {[
-        { key: 'type', title: '유형', index: 0 },
-        { key: 'city', title: '시', index: 2 },
-        { key: 'district', title: '구/동/읍', index: 3 },
+        {
+          key: FILTER_KEYS[0],
+          title: '유형',
+          checks: [...new Set(titles.map((title) => title[0]))],
+        },
+        {
+          key: FILTER_KEYS[1],
+          title: '지역',
+          checks: [...new Set(titles.map((title) => title[2]))],
+        },
+        {
+          key: FILTER_KEYS[2],
+          title: '수익률',
+          checks: ['8% 미만', '8% 대', '9% 대', '10% 대', '11% 대', '12% 이상'],
+        },
+        {
+          key: FILTER_KEYS[3],
+          title: '모집 금액',
+          checks: ['1억원 미만', '1억원 대', '2억원 대', '3억원 대', '4억원 대', '5억원 이상'],
+        },
       ].map((filter) => (
         <div className="grid gap-4" key={filter.key}>
           <label className="peer flex items-center gap-2">
@@ -54,11 +69,11 @@ export default function Filters({ titles }: Props) {
             <IconArrow className="w-6 peer-checked:rotate-180" />
           </label>
           <div className="grid max-h-[20vh] grid-cols-[repeat(auto-fill,minmax(90px,1fr))] gap-3 gap-y-2 overflow-y-auto rounded-xl bg-white p-3 px-4 peer-has-[:checked]:hidden md:max-h-screen dark:bg-gray-700">
-            {[...new Set(titles.map((title) => title[filter.index]))].map((type, index) => (
+            {filter.checks.map((type, index) => (
               <label className="flex cursor-pointer items-center gap-2" key={index}>
                 <input
                   checked={searchParams.getAll(filter.key).some((value) => value === type)}
-                  className="peer h-5 w-5 rounded text-violet-600 transition duration-200 ease-in-out focus:ring-0"
+                  className="peer h-5 w-5 cursor-pointer rounded text-violet-600 transition duration-200 ease-in-out focus:ring-0"
                   onChange={(e) => handleFilterChange(e, filter.key)}
                   type="checkbox"
                   value={type}
@@ -79,8 +94,8 @@ export function FiltersSkeleton() {
   return (
     <div className="flex flex-col gap-8 whitespace-nowrap rounded-xl bg-gray-200 p-4 dark:bg-gray-800">
       <div className="rounded-lg bg-gray-300 p-2 sm:p-3 sm:text-lg dark:bg-gray-700" />
-      {[{ title: '유형' }, { title: '시' }, { title: '구/동/읍' }].map((filter) => (
-        <div key={filter.title}>
+      {FILTER_KEYS.map((filter) => (
+        <div key={filter}>
           <h4 className="mb-4 bg-gray-300 p-2 text-xl font-semibold dark:bg-gray-700" />
           <div className="grid max-h-[30vh] grid-cols-[repeat(auto-fill,minmax(90px,1fr))] gap-2 overflow-y-auto rounded-xl bg-gray-300 p-3 px-4 sm:max-h-[10vh] dark:bg-gray-700" />
         </div>

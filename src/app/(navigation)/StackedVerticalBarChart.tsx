@@ -1,3 +1,5 @@
+'use client'
+
 import { Bullet, Label, Legend, Root, Tooltip, p50, percent } from '@amcharts/amcharts5'
 import {
   AxisRendererX,
