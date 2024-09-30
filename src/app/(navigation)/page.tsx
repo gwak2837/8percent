@@ -5,6 +5,7 @@ import { filterProducts } from '../util/filter'
 import { sortProducts } from '../util/sort'
 import Filters from './Filters'
 import Sort from './Sort'
+import Statistics from './Statistics'
 
 export type Product = {
   index: number
@@ -38,6 +39,7 @@ export default async function Home({ searchParams }: Props) {
       <Filters titles={titles} />
       <div className="flex min-w-0 flex-col gap-1">
         <Sort searchParams={searchParams} />
+        <Statistics titles={titles} />
         <ProductCards products={sortedProducts} />
       </div>
     </>
