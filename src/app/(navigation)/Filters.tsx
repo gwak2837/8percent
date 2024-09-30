@@ -63,12 +63,12 @@ export default function Filters({ titles }: Props) {
         },
       ].map((filter) => (
         <div className="grid gap-4" key={filter.key}>
-          <label className="peer flex items-center gap-2">
+          <label className="peer flex cursor-pointer items-center gap-2">
             <h4 className="text-xl font-semibold">{filter.title}</h4>
             <input className="peer hidden" type="checkbox" />
             <IconArrow className="w-6 peer-checked:rotate-180" />
           </label>
-          <div className="grid max-h-[20vh] grid-cols-[repeat(auto-fill,minmax(90px,1fr))] gap-3 gap-y-2 overflow-y-auto rounded-xl bg-white p-3 px-4 peer-has-[:checked]:hidden md:max-h-screen dark:bg-gray-700">
+          <div className="grid max-h-[20vh] grid-cols-[repeat(auto-fill,minmax(90px,1fr))] gap-3 gap-y-2 overflow-y-auto rounded-xl bg-white p-3 px-4 peer-has-[:checked]:hidden md:max-h-[50vh] dark:bg-gray-700">
             {filter.checks.map((type, index) => (
               <label className="flex cursor-pointer items-center gap-2" key={index}>
                 <input

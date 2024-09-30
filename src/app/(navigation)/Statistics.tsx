@@ -52,7 +52,7 @@ export default function Statistics({ products }: Props) {
 
   return (
     <div className="mb-4 grid gap-2">
-      <label className="peer flex items-center gap-2">
+      <label className="peer flex cursor-pointer items-center gap-2">
         <h4 className="text-xl font-semibold">통계</h4>
         <input className="peer hidden" type="checkbox" />
         <IconArrow className="w-6 peer-checked:rotate-180" />
