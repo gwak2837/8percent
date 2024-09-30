@@ -39,7 +39,7 @@ export default function SearchForm() {
           onClick={handleReset}
           type="button"
         >
-          <IconX className="w-6 text-gray-600 dark:text-gray-400" />
+          <IconX className="w-6 text-gray-400 dark:text-gray-500" />
         </button>
       </div>
       <button className="rounded-lg bg-violet-500 px-4 py-2 text-white transition hover:bg-violet-600">

@@ -15,7 +15,9 @@ export function filterProducts(
     const title = product.title.split(' ')
     return (
       (!typeFilter || typeFilter.includes(title[0])) &&
-      (!cityFilter || cityFilter.includes(title[2]))
+      (!cityFilter || cityFilter.includes(title[2])) &&
+      (!cvgrFilter || true) &&
+      (!loanFilter || true)
     )
   })
 }
