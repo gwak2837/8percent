@@ -42,7 +42,7 @@ export default function SearchForm() {
           <IconX className="w-6 text-gray-400 dark:text-gray-500" />
         </button>
       </div>
-      <button className="rounded-lg bg-violet-500 px-4 py-2 text-white transition hover:bg-violet-600">
+      <button className="rounded-lg bg-violet-500 px-4 py-2 text-white transition hover:bg-violet-600 dark:bg-violet-600 dark:hover:bg-violet-700">
         검색
       </button>
     </form>
