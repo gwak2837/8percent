@@ -47,7 +47,7 @@ export default function Filters({ titles }: Props) {
       </label>
       <div className="flex flex-col gap-6 whitespace-nowrap rounded-xl bg-gray-100 p-4 peer-has-[:checked]:hidden dark:bg-gray-800">
         <button
-          className="rounded-lg bg-red-500 p-2 font-semibold text-white opacity-80 transition hover:bg-red-600 disabled:cursor-not-allowed disabled:bg-gray-400 sm:text-lg disabled:dark:bg-gray-500"
+          className="rounded-lg bg-red-500 p-2 font-semibold text-white opacity-80 hover:bg-red-600 disabled:cursor-not-allowed disabled:bg-gray-400 sm:text-lg disabled:dark:bg-gray-500"
           disabled={FILTER_KEYS.every((key) => !searchParams.get(key))}
           onClick={handleClearFilter}
         >
