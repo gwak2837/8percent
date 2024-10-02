@@ -1,3 +1,5 @@
+import { mockedProducts } from '@/mock/data'
+
 import type { TSort } from '../util/sort'
 
 import ProductCards from '../ProductCards'
@@ -16,12 +18,17 @@ export type Product = {
   length: number
   /** 연 수익률 */
   earningRate: number
-  thumbnail: string
+  thumbnail: string | null
 }
 
 async function getProducts() {
-  const res = await fetch('https://temp-test.d2sqh8spejkbjc.amplifyapp.com/api/test')
-  return (await res.json()) as Product[]
+  try {
+    const res = await fetch('https://temp-test.d2sqh8spejkbjc.amplifyapp.com/api/test')
+    return (await res.json()) as Product[]
+  } catch (error) {
+    console.error('👀 ~ ', error)
+    return mockedProducts
+  }
 }
 
 type Props = {

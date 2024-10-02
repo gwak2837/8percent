@@ -3,6 +3,7 @@ import type { TSort } from '@/app/util/sort'
 import ProductCards from '@/app/ProductCards'
 import { filterProducts } from '@/app/util/filter'
 import { sortProducts } from '@/app/util/sort'
+import { mockedProducts } from '@/mock/data'
 import { notFound } from 'next/navigation'
 
 import Filters from '../Filters'
@@ -11,8 +12,13 @@ import Statistics from '../Statistics'
 import { type Product } from '../page'
 
 async function getProducts() {
-  const res = await fetch('https://temp-test.d2sqh8spejkbjc.amplifyapp.com/api/test')
-  return (await res.json()) as Product[]
+  try {
+    const res = await fetch('https://temp-test.d2sqh8spejkbjc.amplifyapp.com/api/test')
+    return (await res.json()) as Product[]
+  } catch (error) {
+    console.error('👀 ~ ', error)
+    return mockedProducts
+  }
 }
 
 type Props = {
